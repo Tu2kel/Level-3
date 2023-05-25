@@ -1,0 +1,274 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+     background-color: #e5e5e5;
+}
+
+.entirePage{
+  position: relative;
+  left: 25%;
+  top: 25px;
+  /* width: 100%; */
+  width: 550px;
+  /* overflow: auto; */
+
+}
+
+
+.navBarTop{
+  display: flex;
+  /* border: 3px solid red; */
+  /* box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1); */
+  box-shadow: 0px 2.9825618267059326px 7.456404209136963px 0px #0000001A;
+
+
+  width: 550px;
+  height: 70px;
+  left: 0px;
+  top: 0px;
+
+  background: #ffffff;
+  box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1);
+  
+  
+  
+}
+
+.logo{
+  position: relative;
+  
+  background-image: url('airbnblogo.png');
+  background-repeat: no-repeat; 
+  background-position: center; 
+  background-size: 25%;
+  
+}
+
+.airbnbTitle{
+  position: relative;
+  color: #FF5A5F;
+  left: 60px;
+  margin-left: 25px;
+  bottom: 25px;
+  
+  
+}
+/*---------------------  Main Body Middle Below  ------------------------------*/
+
+.alignMain{
+
+  background-color:#fcfcfc;
+  height: 783px;
+  /* width: 550px; */
+  width: 100%;
+}
+
+.topImages{
+  /* border: 2px solid rgb(167, 13, 13); */
+  position: relative;
+  top: 26px;
+  left: 77px;
+  height: 232px;
+  width: 396px;
+  /* background-image: url("topImages.png"); */
+  background-image: url("images/topImages.png");
+  /* background-position: 1%; */
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.middle{
+  position: relative;
+  left: 36px;
+  top: 32px;
+  width: 347px;
+  margin-bottom: 40px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+
+
+
+}
+
+.h2{
+  position: relative;
+  left: 36px;
+  width: 300px;
+  line-height: 1.2;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+
+}
+
+/*---------------------  Main Body Bottom Below  ------------------------------*/
+
+
+.audio {
+    /* content: url("./Hello_Zepp.mp3"); */
+    position: relative;
+    left: 350px;
+    bottom: 425px;
+    width: 35%;
+    
+}
+
+
+/* .container{
+  display: flex;
+
+  position: relative;
+  width: 550px;
+  width: 275px;
+  bottom: 651px;
+  padding-left: 10px;
+  border: 2px solid red;
+
+} */
+.cards-list {
+
+  /* border: 2px solid red; */
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    overflow-x: auto;
+    padding-left: 15px;
+    position: relative;
+    width: 100%;
+    font-size: 12px;
+    
+
+}
+
+.card{ 
+  position: relative;
+
+    
+
+
+}
+
+.card--image{
+    height: 250px;
+    border-radius: 9px;
+    margin-bottom: 9px;
+
+  
+  
+
+   
+
+}
+
+
+.card--stats{
+  font-size: 15px;
+  display: flex;
+    align-items: center;
+
+  
+
+}
+
+.card--star{
+  height: 15px;
+}
+
+.bold{
+
+  font-weight: bold;
+}
+
+
+
+.card--badge {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    background-color: white;
+    padding: 5px 7px;
+    border-radius: 2px;
+    font-weight: bold;
+    border-radius: 0px 10px 0px 10px;
+    background-color: red;
+}
+
+
+
+
+
+
+/* .gallery{
+  display: flex;
+  position: relative;
+  bottom: -40px;
+  background-image: url("katie.png");
+  background-repeat: no-repeat;
+  background-size: 150px;
+  height: 235px;
+  margin-left: 10px;
+
+
+} */
+
+/* .first{
+  position: relative;
+  left: 20px;
+} */
+
+
+
+/* {
+  width: 72.31px;
+height: 96.42px;
+left: 77px;
+top: 144.81px;
+
+background: url(image);
+border-radius: 8.95px;
+} */
+
+/* .App { 
+  text-align: center;
+} */
+
+/*.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */

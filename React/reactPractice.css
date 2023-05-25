@@ -1,0 +1,31 @@
+.allNav{
+    /* display: flex; */
+    flex-direction: coulumn;
+    color: red;
+    justify-content: center;
+    
+       
+}
+
+.nav-items {
+    display: flex;
+    position: relative;
+    list-style: none;
+    justify-content: center;
+    column-gap: 50px;
+    left: 200px
+    
+
+    
+    
+}
+
+.reactPic{
+    display: flex;
+    position: relative;
+     justify-content: center;
+    column-gap: 50px;
+    left: 500px;
+    top: 45px
+    
+}
