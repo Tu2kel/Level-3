@@ -5,20 +5,27 @@ export default function Mbody() {
   const [meme, setMeme] = useState({
     topText: "",
     bottomText: "",
-    randomImage: "https://tinyurl.com/2kchrh2h"
+    randomImage: "https://tinyurl.com/2kchrh2h",
   });
+
+  /*ALLMEMES state stores an array of all available memes 
+  fetched from an API.
+
+  The MEMELIST state stores an array of memes submitted by the user.
+  */
 
   const [allMemes, setAllMemes] = useState([]);
   const [memeList, setMemeList] = useState([]);
-  let counter = 1; // Counter variable for generating IDs
+  const [counter, setCounter] = useState(1);
 
   React.useEffect(function () {
     fetch(`https://api.imgflip.com/get_memes`)
       .then((res) => res.json())
-      .then((data) => setAllMemes(data.data.memes)); 
+      .then((data) => setAllMemes(data.data.memes));
   }, []);
 
   function getMemeImage() {
+    // getMemeImage() generates a random meme image and updates the randomImage state
     const randomNumber = Math.floor(Math.random() * allMemes.length);
     const url = allMemes[randomNumber].url;
     setMeme((prevMeme) => ({
@@ -28,6 +35,7 @@ export default function Mbody() {
   }
 
   function handleChange(event) {
+    // Updates the meme state based on the input changes
     const { name, value } = event.target;
     setMeme((prevMeme) => ({
       ...prevMeme,
@@ -36,18 +44,21 @@ export default function Mbody() {
   }
 
   function handleClick(e) {
+    // Handles the submit button click event and adds a new meme to the memeList state
     e.preventDefault();
     const newMeme = {
-      id: counter++, // Generate a unique ID manually
+      id: counter, // Increment the counter and use its value
       topText: meme.topText,
       bottomText: meme.bottomText,
       randomImage: meme.randomImage,
     };
 
     setMemeList((prevList) => [...prevList, newMeme]);
+    setCounter((prevCounter) => prevCounter + 1); // Increment the counter
   }
 
   function deleted(id) {
+    // Handles the deletion of a meme from the memeList state based on its ID
     setMemeList((prevList) => prevList.filter((meme) => meme.id !== id));
   }
 
@@ -72,6 +83,7 @@ export default function Mbody() {
           onChange={handleChange}
         />
         <br />
+        <br />
         <button onClick={getMemeImage} className="meme-btn">
           Get a new meme image 🖼️
         </button>
@@ -86,17 +98,16 @@ export default function Mbody() {
         <h2 className="meme--text_top"> {meme.topText} </h2>
         <h2 className="meme--text_bottom">{meme.bottomText}</h2>
       </div>
+      <br />
+      <br />
 
       <ul className="list">
-        {memeList.map((meme, index) => (
-          <li key={index} className="newPic">
+        {memeList.map((meme) => (
+          <li key={meme.id} className="newPic">
             <img src={meme.randomImage} alt="Meme" />
             <h2 className="text_top"> {meme.topText} </h2>
             <h2 className="text_bottom">{meme.bottomText}</h2>
-            <button
-              className="delete-btn"
-              onClick={() => deleted(meme.id)}
-            >
+            <button className="delete-btn" onClick={() => deleted(meme.id)}>
               x
             </button>
           </li>
