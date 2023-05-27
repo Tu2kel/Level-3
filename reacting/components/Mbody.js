@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+// This code has the Edit and Save button in it
+
 export default function Mbody() {
   const [meme, setMeme] = useState({
     topText: "",
@@ -9,6 +11,8 @@ export default function Mbody() {
   const [allMemes, setAllMemes] = useState([]);
   const [memeList, setMemeList] = useState([]);
   const [counter, setCounter] = useState(1);
+  const [editMode, setEditMode] = useState(null);
+  // const [editText, setEditText] = useState("");
 
   useEffect(() => {
     fetch(`https://api.imgflip.com/get_memes`)
@@ -17,14 +21,15 @@ export default function Mbody() {
 
     const storedMemeList = localStorage.getItem("memeList");
     if (storedMemeList) {
-      const parsedMemeList = JSON.parse(storedMemeList);
-      const filteredMemeList = parsedMemeList.filter(
-        (meme) => meme.deleted !== true
-      );
-      setMemeList(filteredMemeList);
-      setCounter(filteredMemeList.length + 1);
+      setMemeList(JSON.parse(storedMemeList));
+      setCounter(JSON.parse(storedMemeList).length + 1);
+      console.log(localStorage.getItem);
     }
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("memeList", JSON.stringify(memeList));
+  }, [memeList]);
 
   function getMemeImage() {
     const randomNumber = Math.floor(Math.random() * allMemes.length);
@@ -50,21 +55,33 @@ export default function Mbody() {
       topText: meme.topText,
       bottomText: meme.bottomText,
       randomImage: meme.randomImage,
-      deleted: false, // Add a 'deleted' property to track deleted memes
     };
 
     setMemeList((prevList) => [...prevList, newMeme]);
     setCounter((prevCounter) => prevCounter + 1);
-
-    localStorage.setItem("memeList", JSON.stringify([...memeList, newMeme]));
   }
 
   function deleted(id) {
-    const updatedMemeList = memeList.filter((meme) => meme.id !== id);
-    setMemeList(updatedMemeList);
-    localStorage.setItem("memeList", JSON.stringify(updatedMemeList));
+    setMemeList((prevList) => prevList.filter((meme) => meme.id !== id));
   }
 
+  function enableEditMode(id) {
+    setEditMode(id);
+  }
+
+  function handleEditChange(event, id) {
+    const { name, value } = event.target;
+    setMemeList((prevList) =>
+      prevList.map((meme) =>
+        meme.id === id ? { ...meme, [name]: value } : meme
+      )
+    );
+  }
+
+  function saveChanges(id) {
+    setEditMode(null);
+    // Save the changes to localStorage if needed
+  }
 
   return (
     <div className="innerContainer">
@@ -106,6 +123,52 @@ export default function Mbody() {
       <ul className="list">
         {memeList.map((meme) => (
           <li key={meme.id} className="newPic">
+            {editMode === meme.id ? (
+              <>
+                <input
+                  type="text"
+                  placeholder="top of pic"
+                  className="inputLeft"
+                  name="topText"
+                  value={meme.topText}
+                  onChange={(e) => handleEditChange(e, meme.id)}
+                />
+                <input
+                  type="text"
+                  placeholder="bottom of pic"
+                  className="inputRight"
+                  name="bottomText"
+                  value={meme.bottomText}
+                  onChange={(e) => handleEditChange(e, meme.id)}
+                />
+                <button
+                  className="save-btn"
+                  onClick={() => saveChanges(meme.id)}
+                >
+                  Save
+                </button>
+              </>
+            ) : (
+              <>
+                <img src={meme.randomImage} alt="Meme" />
+                <h2 className="text_top"> {meme.topText} </h2>
+                <h2 className="text_bottom">{meme.bottomText}</h2>
+                <button
+                  className="edit-btn"
+                  onClick={() => enableEditMode(meme.id)}
+                >
+                  Edit
+                </button>
+                <button className="delete-btn" onClick={() => deleted(meme.id)}>
+                  x
+                </button>
+              </>
+            )}
+          </li>
+        ))}
+
+        {/* {memeList.map((meme) => (
+          <li key={meme.id} className="newPic">
             <img src={meme.randomImage} alt="Meme" />
             <h2 className="text_top"> {meme.topText} </h2>
             <h2 className="text_bottom">{meme.bottomText}</h2>
@@ -113,11 +176,10 @@ export default function Mbody() {
               x
             </button>
           </li>
-        ))}
+        ))} */}
       </ul>
 
       <br />
     </div>
   );
 }
- 
