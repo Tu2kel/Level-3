@@ -223,6 +223,15 @@ input{
     /* padding: 0px 2vw 0px 3vw; */
 }
 
+.content{
+    color: #672280;
+    font-size: 3rem;
+    text-align: center;
+    text-decoration: overline underline;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
 
 
 
