@@ -7,15 +7,15 @@ export default function Mbody() {
     randomImage: "https://tinyurl.com/2kchrh2h",
   });
 
-  const [editMeme, setEditMeme] =  useState({
+  const [editMeme, setEditMeme] = useState({
     editTopText: "",
-    editBottomText: ""
-  })
+    editBottomText: "",
+  });
 
   const [allMemes, setAllMemes] = useState([]);
   const [memeList, setMemeList] = useState([]);
   const [counter, setCounter] = useState(1);
-  const [edit, setEdit] = useState(null);
+  const [edit, setEdit] = useState(false);
 
   useEffect(() => {
     fetch(`https://api.imgflip.com/get_memes`)
@@ -50,21 +50,28 @@ export default function Mbody() {
     }));
   }
 
+  function handleChangeEdit(event) {
+    const { name, value } = event.target;
+    setEditMeme((prevEditMeme) => ({
+      ...prevEditMeme,
+      [name]: value,
+    }));
+  }
+
   function handleClick(e) {
     e.preventDefault();
     const newMeme = {
-      id: counter,
+      id: counter, // to generate a number to Id each new image
       topText: meme.topText,
       bottomText: meme.bottomText,
       randomImage: meme.randomImage,
-      deleted: false, 
-      
+      deleted: false,
     };
 
     setMemeList((prevList) => [...prevList, newMeme]);
     setCounter((prevCounter) => prevCounter + 1);
 
-    localStorage.setItem("memeList", JSON.stringify([...memeList, newMeme]));
+    localStorage.setItem("memeList", JSON.stringify([...memeList, newMeme])); //Stores the updated memeList in the browser's local storage as a string.
   }
 
   function deleted(id) {
@@ -73,23 +80,28 @@ export default function Mbody() {
     localStorage.setItem("memeList", JSON.stringify(updatedMemeList));
   }
 
-  function editButton(id) {
+  function editButton() {
     console.log("edit fires");
-    setEdit(id);
+    setEdit((prev) => !prev);
   }
 
-  function saveButton() {
+  function saveButton(id) {
     console.log("save fires");
-    // setMemeList(prevList => ([
-    //   ...prevList,
-    //   { topText: editMeme.editTopText,
-    //     bottomText: editMeme.editBottomText
-    //   }
-    // ]))
-    // const editedMeme = memeList.find((meme) => meme.id === edit);
+    const updatedMemeList = memeList.map((meme) => {
+      if (meme.id === id) {
+        return {
+          ...meme,
+          topText: editMeme.editTopText,
+          bottomText: editMeme.editBottomText,
+        };
+      }
+      return meme;
+    });
+    setMemeList(updatedMemeList);
+    localStorage.setItem("memeList", JSON.stringify(updatedMemeList));
     setEdit(null);
   }
-  console.log(memeList, "memeList")
+  console.log(memeList, "memeList");
 
   return (
     <div className="innerContainer">
@@ -133,29 +145,28 @@ export default function Mbody() {
         {memeList.map((meme) => (
           <li key={meme.id} className="newPic">
             <img src={meme.randomImage} alt="Meme" />
-            {edit === meme.id ? (
+            {edit ? ( 
               <div>
                 <input
                   type="text"
                   placeholder="top of pic"
                   className="inputLeft"
                   name="editTopText"
-                  value={editMeme.editTopText.id}
-                  onChange={handleChange}
+                  value={editMeme.editTopText}
+                  onChange={handleChangeEdit}
                 />
                 <input
                   type="text"
                   placeholder="bottom of pic"
                   className="inputRight"
                   name="editBottomText"
-                  value={editMeme.editBottomText.id}
-                  onChange={handleChange}
+                  value={editMeme.editBottomText}
+                  onChange={handleChangeEdit}
                 />
                 <button
                   className="save-btn"
                   onClick={() => saveButton(meme.id)}
-                >
-                  Save
+                >Save
                 </button>
               </div>
             ) : (
@@ -176,10 +187,6 @@ export default function Mbody() {
           </li>
         ))}
       </ul>
-
-      <br />
     </div>
   );
 }
-
- 
