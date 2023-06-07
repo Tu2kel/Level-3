@@ -1,0 +1,121 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+audio{
+    display: none; 
+
+}
+
+.container{
+    /* border: 2px solid red; */
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    background-color:  rgb(14, 16, 17);
+
+
+}
+
+
+.galleryHeader{
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+    text-decoration: underline overline;
+    /* border: 2px solid red; */
+    height: 400vh;
+    overflow: hidden;
+    margin-left: 20vh;
+    margin-right: 20vh;
+    color: rgb(94, 239, 16);
+    font-size: 4vh;
+    /* background-color: rgb(90, 4, 4); */
+    /* background-color: rgb(90, 4, 4); */
+
+
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 60vw;
+  margin: 0 auto;
+}
+
+.gallery > div {
+  flex-basis: calc(33.33% - 10px);
+  margin-bottom: 20px;
+  position: relative;
+    bottom: 390vh;
+}
+
+.gallery > div img {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+}
+
+
+
+
+.addImgBtn{
+    position: relative;
+    top: 5vh;
+    right: 28%;
+    height: 3vh;
+    width: 8vw;
+}
+
+.formContainer{
+    background-color: rgba(6, 110, 208, 0.629);
+    height: 20vh;
+    color: rgba(6, 110, 208, 0.629);
+}
+
+.form{
+    position: relative;
+    top: 5vh;
+    
+
+
+}
+.form > input{
+    position: relative;
+    height: 3vh;
+    width: 16vw;
+    align-content: center;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    column-gap: 1vw;
+    position: relative;
+    
+
+
+
+}
+
+.edit, .delete{
+    color: red;
+    background: black;
+    border-radius: 20%;
+    height: 3vh;
+    width: 3vw;
+
+}
+h1, h2{
+   color: rgb(94, 239, 16);
+}
+
+
+
+
+
+
+
+

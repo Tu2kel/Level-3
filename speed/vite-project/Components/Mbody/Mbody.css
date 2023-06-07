@@ -21,7 +21,7 @@
 
 .toDarken{
 
-       background-color: #232121; 
+    background-color: #232121; 
 
 }
 
@@ -69,10 +69,11 @@ button{
 }
 
 .screen{
-    border: 2px solid red;
+    border: 2px solid #ff0000;
     margin: 0 1vw 0 1vw; 
     grid-row: 2;
     background-color: rgb(79, 22, 22);
+    background-color: #830c0c;
     color: white;
 }
 

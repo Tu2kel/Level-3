@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import IMeme from "./IMeme";
 
 export default function Mbody() {
   const [meme, setMeme] = useState({
@@ -7,15 +8,15 @@ export default function Mbody() {
     randomImage: "https://tinyurl.com/2kchrh2h",
   });
 
-  const [editMeme, setEditMeme] = useState({
-    editTopText: "",
-    editBottomText: "",
-  });
+  // const [editMeme, setEditMeme] = useState({
+  //   editTopText: "",
+  //   editBottomText: "",
+  // });
 
   const [allMemes, setAllMemes] = useState([]);
   const [memeList, setMemeList] = useState([]);
   const [counter, setCounter] = useState(1);
-  const [edit, setEdit] = useState(false);
+  // const [edit, setEdit] = useState(false);
 
   useEffect(() => {
     fetch(`https://api.imgflip.com/get_memes`)
@@ -50,13 +51,13 @@ export default function Mbody() {
     }));
   }
 
-  function handleChangeEdit(event) {
-    const { name, value } = event.target;
-    setEditMeme((prevEditMeme) => ({
-      ...prevEditMeme,
-      [name]: value,
-    }));
-  }
+  // function handleChangeEdit(event) {
+  //   const { name, value } = event.target;
+  //   setEditMeme((prevEditMeme) => ({
+  //     ...prevEditMeme,
+  //     [name]: value,
+  //   }));
+  // }
 
   function handleClick(e) {
     e.preventDefault();
@@ -82,10 +83,10 @@ export default function Mbody() {
 
   function editButton() {
     console.log("edit fires");
-    setEdit((prev) => !prev);
+setEdit((prev) => !prev);
   }
 
-  function saveButton(id) {
+  function saveButton(id, editMeme) {
     console.log("save fires");
     const updatedMemeList = memeList.map((meme) => {
       if (meme.id === id) {
@@ -99,7 +100,10 @@ export default function Mbody() {
     });
     setMemeList(updatedMemeList);
     localStorage.setItem("memeList", JSON.stringify(updatedMemeList));
-    setEdit(null);
+  
+  }
+  function silly(){
+    console.log('testthis out')
   }
   console.log(memeList, "memeList");
 
@@ -143,48 +147,7 @@ export default function Mbody() {
 
       <ul className="list">
         {memeList.map((meme) => (
-          <li key={meme.id} className="newPic">
-            <img src={meme.randomImage} alt="Meme" />
-            {edit ? ( 
-              <div>
-                <input
-                  type="text"
-                  placeholder="top of pic"
-                  className="inputLeft"
-                  name="editTopText"
-                  value={editMeme.editTopText}
-                  onChange={handleChangeEdit}
-                />
-                <input
-                  type="text"
-                  placeholder="bottom of pic"
-                  className="inputRight"
-                  name="editBottomText"
-                  value={editMeme.editBottomText}
-                  onChange={handleChangeEdit}
-                />
-                <button
-                  className="save-btn"
-                  onClick={() => saveButton(meme.id)}
-                >Save
-                </button>
-              </div>
-            ) : (
-              <div>
-                <h2 className="text_top">{meme.topText}</h2>
-                <h2 className="text_bottom">{meme.bottomText}</h2>
-                <button
-                  className="edit-btn"
-                  onClick={() => editButton(meme.id)}
-                >
-                  Edit
-                </button>
-                <button className="delete-btn" onClick={() => deleted(meme.id)}>
-                  x
-                </button>
-              </div>
-            )}
-          </li>
+        <IMeme {...meme} saveButton = {saveButton} silly = {silly} />
         ))}
       </ul>
     </div>

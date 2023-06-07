@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Pixels&display=swap');
+
+/* TEXT */
+.wrap{
+    color: red;
+
+}
+/* BODY */
+.mainBody{
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
+    position: relative;
+    left: 25%;
+    background-color: #090808;
+    height: 100vh;
+    width: 50vw;
+    border: 2px solid red;
+}
+
+.toDarken{
+
+       background-color: #232121; 
+
+}
+
+/* SECTIONS */
+.title{
+    display: flex;
+    width: 50vw;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+    font-family: 'Rubik Pixels', cursive;
+    grid-row: 1;
+    
+    
+
+}
+
+.bottomText{
+
+    display: flex;
+    width: 50vw;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    font-family: 'Rubik Pixels', cursive;  
+    grid-row: 3;
+}
+
+button{
+
+    position: relative;
+    height: 6vh;
+    width: 10vw;
+    top: 5rem;
+    right: 30vw;
+    grid-row: 3;
+    color: red;
+    background-color: rgb(28, 18, 18);
+    font-family: 'Rubik Pixels', cursive;
+    font-size: 20px;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+.screen{
+    border: 2px solid red;
+    margin: 0 1vw 0 1vw; 
+    grid-row: 2;
+    background-color: rgb(79, 22, 22);
+    color: white;
+}
+
